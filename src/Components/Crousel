@@ -1,0 +1,42 @@
+import React, { useState } from "react";
+
+const Carousel = ({ photos }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? photos.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === photos.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  return (
+    <div className="carousel">
+      <button onClick={goToPrevious} className="nav-button prev">
+        &lt;
+      </button>
+      <div className="carousel-viewport">
+        <div
+          className="carousel-content"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {photos.map((photo, index) => (
+            <div className="photo" key={index}>
+              {photo}
+            </div>
+          ))}
+        </div>
+      </div>
+      <button onClick={goToNext} className="nav-button next">
+        &gt;
+      </button>
+    </div>
+  );
+};
+
+export default Carousel;
